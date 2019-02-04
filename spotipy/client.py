@@ -352,11 +352,11 @@ class Spotify(object):
 		return self._get('users/' + user)
 
 	def current_user_playlists(self, limit=50, offset=0):
-		""" Get current user playlists without required getting his profile
+		''' Get current user playlists without required getting his profile
 			Parameters:
 				- limit  - the number of items to return
 				- offset - the index of the first item to return
-		"""
+		'''
 		return self._get("me/playlists", limit=limit, offset=offset)
 
 	def user_playlists(self, user, limit=50, offset=0):

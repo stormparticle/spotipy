@@ -10,7 +10,6 @@ import time
 ''' A simple and thin Python library for the Spotify Web API
 '''
 
-
 class SpotifyException(Exception):
 	def __init__(self, http_status, code, msg, headers=None):
 		self.http_status = http_status

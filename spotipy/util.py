@@ -7,8 +7,6 @@ import requests
 import json
 import time
 
-import six
-
 ''' A simple and thin Python library for the Spotify Web API
 '''
 
@@ -425,13 +423,13 @@ class Spotify(object):
 				- description - optional description of the playlist
 		'''
 		data = {}
-		if isinstance(name, six.string_types):
+		if isinstance(name, str):
 			data['name'] = name
 		if isinstance(public, bool):
 			data['public'] = public
 		if isinstance(collaborative, bool):
 			data['collaborative'] = collaborative
-		if isinstance(description, six.string_types):
+		if isinstance(description, str):
 			data['description'] = description
 		return self._put("users/%s/playlists/%s" % (user, playlist_id),
 						 payload=data)

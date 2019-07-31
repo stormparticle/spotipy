@@ -24,11 +24,11 @@ class SpotifyClientCredentials(object):
 	OAUTH_TOKEN_URL = 'https://accounts.spotify.com/api/token'
 
 	def __init__(self, client_id=None, client_secret=None, proxies=None):
-		"""
+		'''
 		You can either provid a client_id and client_secret to the
 		constructor or set SPOTIPY_CLIENT_ID and SPOTIPY_CLIENT_SECRET
 		environment variables
-		"""
+		'''
 		if not client_id:
 			client_id = os.getenv('SPOTIPY_CLIENT_ID')
 
@@ -47,10 +47,10 @@ class SpotifyClientCredentials(object):
 		self.proxies = proxies
 
 	def get_access_token(self):
-		"""
+		'''
 		If a valid access token is in memory, returns it
 		Else feches a new token and returns it
-		"""
+		'''
 		if self.token_info and not self._is_token_expired(self.token_info):
 			return self.token_info['access_token']
 
@@ -60,7 +60,7 @@ class SpotifyClientCredentials(object):
 		return self.token_info['access_token']
 
 	def _request_access_token(self):
-		"""Gets client credentials access token """
+		'''Gets client credentials access token '''
 		payload = { 'grant_type': 'client_credentials'}
 
 		if sys.version_info[0] >= 3: # Python 3
@@ -82,10 +82,10 @@ class SpotifyClientCredentials(object):
 		return token_info['expires_at'] - now < 60
 
 	def _add_custom_values_to_token_info(self, token_info):
-		"""
+		'''
 		Store some values that aren't directly provided by a Web API
 		response.
-		"""
+		'''
 		token_info['expires_at'] = int(time.time()) + token_info['expires_in']
 		return token_info
 
@@ -163,8 +163,8 @@ class SpotifyOAuth(object):
 		return token_info['expires_at'] < now
 
 	def get_authorize_url(self):
-		""" Gets the URL to use to authorize this app
-		"""
+		''' Gets the URL to use to authorize this app
+		'''
 		payload = {'client_id': self.client_id,
 				   'response_type': 'code',
 				   'redirect_uri': self.redirect_uri}
@@ -178,11 +178,11 @@ class SpotifyOAuth(object):
 		return "%s?%s" % (self.OAUTH_AUTHORIZE_URL, urlparams)
 
 	def parse_response_code(self, url):
-		""" Parse the response code in the given response url
+		''' Parse the response code in the given response url
 
 			Parameters:
 				- url - the response url
-		"""
+		'''
 
 		try:
 			return url.split("?code=")[1].split("&")[0]
@@ -190,11 +190,11 @@ class SpotifyOAuth(object):
 			return None
 
 	def get_access_token(self, code):
-		""" Gets the access token for the app given the code
+		''' Gets the access token for the app given the code
 
 			Parameters:
 				- code - the response code
-		"""
+		'''
 
 		payload = {'redirect_uri': self.redirect_uri,
 				   'code': code,
@@ -266,4 +266,3 @@ class SpotifyOAuth(object):
 
 	def _warn(self, msg):
 		print('warning:' + msg, file=sys.stderr)
-

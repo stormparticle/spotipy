@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='spotipy',
+    name='spotipy-legacy',
     version='2.4.4',
     description='simple client for the Spotify Web API',
     author="@plamere",
@@ -12,4 +12,4 @@ setup(
         'six>=1.10.0',
     ],
     license='LICENSE.txt',
-    packages=['spotipy'])
+    packages=['spotipy-legacy'])
